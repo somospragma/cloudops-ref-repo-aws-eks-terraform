@@ -1,6 +1,6 @@
 # Módulo Terraform para Amazon EKS
 
-Este módulo de Terraform permite crear y gestionar clusters de Amazon Elastic Kubernetes Service (EKS) con todas las mejores prácticas de seguridad, nomenclatura y configuración según los estándares.
+Este módulo de Terraform facilita la creación y administración de clústeres de Amazon Elastic Kubernetes Service (EKS), incorporando buenas prácticas en seguridad, organización de recursos y configuración del entorno..
 
 ## Características
 
