@@ -1,3 +1,4 @@
+# Módulo para crear el cluster EKS (sin addons)
 module "eks_cluster" {
   source = "../../modules/eks-cluster"
   
@@ -32,7 +33,7 @@ module "eks_cluster" {
   }
 }
 
-
+# Módulo - perfiles de Fargate
 module "eks_fargate" {
   source = "../../modules/eks-fargate"
   
@@ -77,6 +78,7 @@ module "eks_fargate" {
   depends_on = [module.eks_cluster]
 }
 
+# Módulo para crear addons después de que Fargate esté disponible
 module "eks_addons" {
   source = "../../modules/eks-addons"
   

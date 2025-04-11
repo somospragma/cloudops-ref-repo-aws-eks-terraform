@@ -1,3 +1,4 @@
+# Cluster EKS
 resource "aws_eks_cluster" "this" {
   provider = aws.project
   for_each = var.eks_config
@@ -14,12 +15,13 @@ resource "aws_eks_cluster" "this" {
     public_access_cidrs     = each.value.endpoint_public_access ? each.value.public_access_cidrs : null
   }
   
+  # Configuración de red de Kubernetes
   kubernetes_network_config {
     ip_family         = each.value.ip_family
     service_ipv4_cidr = each.value.service_ipv4_cidr
   }
   
-
+  # Configuración avanzada de acceso
   dynamic "access_config" {
     for_each = each.value.access_config != null ? [each.value.access_config] : []
     
@@ -41,8 +43,10 @@ resource "aws_eks_cluster" "this" {
     }
   }
   
+  # Configuración de logs
   enabled_cluster_log_types = each.value.create_cloudwatch_log_group ? each.value.cluster_enabled_log_types : []
   
+  # Timeouts personalizados
   dynamic "timeouts" {
     for_each = each.value.timeouts != null ? [each.value.timeouts] : []
     
@@ -53,13 +57,16 @@ resource "aws_eks_cluster" "this" {
     }
   }
   
+  # Asegurar que los recursos dependientes se creen primero
   depends_on = [
     aws_cloudwatch_log_group.this
   ]
-  # Tags Adicionales
+  
+  # Solo etiquetas adicionales específicas para este recurso
   tags = each.value.additional_tags
 }
 
+# Grupo de logs de CloudWatch para el cluster EKS
 resource "aws_cloudwatch_log_group" "this" {
   provider = aws.project
   for_each = {
@@ -73,6 +80,7 @@ resource "aws_cloudwatch_log_group" "this" {
   tags = each.value.additional_tags
 }
 
+# Proveedor OIDC para el cluster EKS
 data "tls_certificate" "cluster" {
   for_each = var.eks_config
   

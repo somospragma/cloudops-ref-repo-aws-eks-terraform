@@ -1,3 +1,4 @@
+# Add-ons del cluster EKS
 resource "aws_eks_addon" "this" {
   provider = aws.project
   for_each = local.addons_map
@@ -11,6 +12,7 @@ resource "aws_eks_addon" "this" {
   preserve                 = each.value.addon.preserve
   configuration_values     = each.value.addon.configuration_values
   
+  # Configuración de timeouts más largos para los addons
   dynamic "timeouts" {
     for_each = each.value.timeouts != null ? [each.value.timeouts] : []
     
@@ -21,6 +23,6 @@ resource "aws_eks_addon" "this" {
     }
   }
   
-  # Tags adicionales
+  # Etiquetas adicionales
   tags = each.value.additional_tags
 }

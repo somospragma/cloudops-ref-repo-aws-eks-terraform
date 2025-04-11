@@ -24,10 +24,10 @@ variable "eks_config" {
     }), null)
     
     # Configuración de cifrado
-    encryption_config = optional(list(object({
+    encryption_config = list(object({
       provider_key_arn = string
       resources        = list(string)
-    })), [])
+    }))
     
     # Configuración de logs
     create_cloudwatch_log_group            = optional(bool, true)

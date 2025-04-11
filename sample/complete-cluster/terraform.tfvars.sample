@@ -1,0 +1,65 @@
+# General configuration
+aws_region  = "us-east-1"
+profile     = "default"
+client      = "pragma"
+project     = "demo"
+environment = "dev"
+
+# Common tags
+common_tags = {
+  provisioned = "terraform"
+  owner       = "cloudops"
+  area        = "infrastructure"
+  datatype    = "operational"
+}
+
+# EKS cluster configuration
+eks_config = {
+  "main" = {
+    kubernetes_version      = "1.28"
+    vpc_id                  = "vpc-12345678"  # Replace with your VPC ID
+    subnet_ids              = ["subnet-1", "subnet-2", "subnet-3"]  # Replace with your subnet IDs
+    cluster_role_arn        = "arn:aws:iam::123456789012:role/eks-cluster-role"  # Replace with your role ARN
+    cluster_security_group_ids = ["sg-12345678"]  # Replace with your security group ID
+    
+    # Endpoint access configuration
+    endpoint_private_access = true
+    endpoint_public_access  = true
+    public_access_cidrs     = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+    
+    # Kubernetes network configuration
+    ip_family         = "ipv4"
+    service_ipv4_cidr = "172.20.0.0/16"
+    
+    # Advanced access configuration
+    access_config = {
+      authentication_mode = "API_AND_CONFIG_MAP"
+      bootstrap_cluster_creator_admin_permissions = true
+    }
+    
+    # Encryption configuration
+    encryption_config = [{
+      provider_key_arn = "arn:aws:kms:us-east-1:123456789012:key/abcd1234-ab12-cd34-ef56-abcdef123456"  # Replace with your KMS key ARN
+      resources        = ["secrets"]
+    }]
+    
+    # Logging configuration
+    create_cloudwatch_log_group            = true
+    cloudwatch_log_group_retention_in_days = 30
+    cluster_enabled_log_types              = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+    
+    # Custom timeouts
+    timeouts = {
+      create = 45
+      update = 60
+      delete = 30
+    }
+    
+    # Additional tags
+    additional_tags = {
+      "kubernetes.io/cluster-name" = "pragma-demo-dev-eks-main"
+      "environment" = "dev"
+      "criticality" = "high"
+    }
+  }
+}

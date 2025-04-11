@@ -1,3 +1,4 @@
+# Perfiles de Fargate para EKS
 resource "aws_eks_fargate_profile" "this" {
   provider = aws.project
   for_each = var.fargate_profiles
@@ -7,7 +8,7 @@ resource "aws_eks_fargate_profile" "this" {
   pod_execution_role_arn = each.value.pod_execution_role_arn
   subnet_ids             = each.value.subnet_ids
   
-
+  # Selectores de Fargate
   dynamic "selector" {
     for_each = each.value.selectors
     
@@ -17,7 +18,7 @@ resource "aws_eks_fargate_profile" "this" {
     }
   }
   
- 
+  # Timeouts personalizados
   dynamic "timeouts" {
     for_each = each.value.timeouts != null ? [each.value.timeouts] : []
     
