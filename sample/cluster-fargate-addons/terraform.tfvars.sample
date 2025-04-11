@@ -4,13 +4,13 @@ client      = "pragma"
 project     = "demo"
 environment = "dev"
 
-vpc_id = "vpc-04c288dc235bfea0e" # Reemplazar con el ID de tu VPC
+vpc_id = "vpc-1234567890" # Reemplazar con el ID de tu VPC
 
-subnet_ids = [ "subnet-088a43cfbec9497f0", "subnet-00042ca93c6c9873a" ]
+subnet_ids = [ "subnet-1234567890", "subnet-1234567890" ]
 endpoint_public_access = true
 public_access_cidrs    = ["0.0.0.0/0"] # Reemplazar con tus CIDRs permitidos
 
 log_retention_days = 7
-cluster_role_arn = "arn:aws:iam::840021737375:role/AmazonEKSAutoClusterRole"
-security_group_ids = ["sg-076e868a2334c8990"]
-pod_execution_role_arn = "arn:aws:iam::840021737375:role/RoleEKSFargatePod"
+cluster_role_arn = "arn:aws:iam::1234567890:role/AmazonEKSAutoClusterRole"
+security_group_ids = ["sg-1234567890"]
+pod_execution_role_arn = "arn:aws:iam::1234567890:role/RoleEKSFargatePod"
