@@ -17,7 +17,7 @@ Este módulo de Terraform facilita la creación y administración de clústeres 
 
 | Nombre | Versión |
 |--------|---------|
-| terraform | >= 1.0.0 |
+| terraform | >= 1.10.0 |
 | aws | >= 4.31.0 |
 | kubernetes | >= 2.10.0 |
 | tls | >= 3.0.0 |
