@@ -1,0 +1,16 @@
+profile     = "profile"
+aws_region  = "us-east-1"
+client      = "pragma"
+project     = "demo"
+environment = "dev"
+
+vpc_id = "vpc-1234567890" # Reemplazar con el ID de tu VPC
+
+subnet_ids = [ "subnet-1234567890", "subnet-1234567890" ]
+endpoint_public_access = true
+public_access_cidrs    = ["0.0.0.0/0"] # Reemplazar con tus CIDRs permitidos
+
+log_retention_days = 7
+cluster_role_arn = "arn:aws:iam::1234567890:role/AmazonEKSAutoClusterRole"
+security_group_ids = ["sg-1234567890"]
+pod_execution_role_arn = "arn:aws:iam::1234567890:role/RoleEKSFargatePod"
